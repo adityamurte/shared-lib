@@ -1,6 +1,8 @@
-def notifyBuild(String buildStatus = 'STARTED') {
+def call(String buildStatus = 'STARTED') {
   // build status of null means successful
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+  //This is the condition which we are checking weather buildStatus is SUCCESSFULL or not.
+ //This line updated to show the Eclipse with GitHub demo
+  buildStatus =  buildStatus ?: 'SUCCESS'
 
   // Default values
   def colorName = 'RED'
@@ -10,16 +12,16 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
   // Override default values based on build status
   if (buildStatus == 'STARTED') {
-    color = 'YELLOW'
+    colorName = 'YELLOW'
     colorCode = '#FFFF00'
-  } else if (buildStatus == 'SUCCESSFUL') {
-    color = 'GREEN'
+  } else if (buildStatus == 'SUCCESS') {
+    colorName = 'GREEN'
     colorCode = '#00FF00'
   } else {
-    color = 'RED'
+    colorName = 'RED'
     colorCode = '#FF0000'
   }
 
-  // Send notifications
+  // Calling the slackSend function to Send notifications.
   slackSend (color: colorCode, message: summary)
 }
